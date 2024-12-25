@@ -1,0 +1,8 @@
+- add widget with suumary of man-hours
+- add graph distrib time betwen airlines
+- add graph to man hours distr during time
+- make 2 diff color pallete (without cross color moment)
+- add func to input quantity staff for every type of activate in web-app
+- add func to count the compliance of the number of technical staff to fulfill the shift plan
+- add dataframe with works outside 4 mh man_hours
+- tune filters
