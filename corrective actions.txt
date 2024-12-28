@@ -6,3 +6,7 @@
 - add func to count the compliance of the number of technical staff to fulfill the shift plan
 - add dataframe with works outside 4 mh man_hours
 - tune filters
+- настроить адаптивность отображения таблиц и графиков
+- настроить отображение всех ВС, присутствующих на Shift_plan
+- написать и отобразить инструкцию по представлению CSV файла для загрузки в программу.
+- сформировать план отображения графиков и виджетов для приложения.

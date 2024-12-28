@@ -4,14 +4,16 @@ import altair as alt
 import numpy as np
     
 st.set_page_config(
-    page_title="Shift plan vizualization",
+    page_title="UTG_MaintenanceApp",
     page_icon=None,
     layout="wide"
 )
 
-st.title('Shift plan aircraft maintenance')
+st.title('Shift plan aircraft maintenance UTG')
 
 with st.container(border=True):
+    st.subheader('Instructions for preparing a file for uploading to the UTG_MaintenanceApp application:')
+    st.text('- generate an .xlsl file in GoogleDoc or Excel\n- transfer information from the letter to the generated file\n- check for information in the following columns:\n airline name, aircraft type, aircraft reg. number, package number, WO number, job description, work package, start time, end time, performer category, work intensity \n- check the column sequence STRICTLY as specified in the line above\n- fill in the performer category column (manually - based on experience in aviation)\n- delete the line with the column names\n- save the file in .CSV format\n- upload the file to the UTG_MaintenanceApp program')
 
     uploaded_file = st.file_uploader("Upload a CSV file", type='csv')
     if uploaded_file is not None:
@@ -50,7 +52,7 @@ with st.container(border=True):
         # переведем столбец man_hours в формат строки, для создания chart_1.
         ac_pack_dist_gr['man_hours'] = ac_pack_dist_gr['man_hours'].astype(str)
 
-        hard_work = df.query('man_hours > 4').iloc[:,:-1].reset_index(drop=True)
+        hard_work = df.query('man_hours > 4 or cat=="STR" or cat=="NDT"').iloc[:,:-1].reset_index(drop=True).sort_values(by='man_hours',ascending=False)
 
         all_works = df.iloc[:,:-1]
 
@@ -64,7 +66,7 @@ with st.container(border=True):
             y='reg_number',
             color=alt.Color('ac_type', scale=alt.Scale(scheme='tableau20')),
             tooltip=['package','cat','man_hours']
-        ).properties(height=300, width=1300,title='Shift plan')
+        ).properties(height=500,title='Shift plan')
         text_ch_1 = chart_1.mark_text(
             align="left",
             baseline="middle",
@@ -84,7 +86,7 @@ with st.container(border=True):
             xOffset='cat',
             y=alt.Y('man_hours', axis=alt.Axis(grid=True)),
             color=alt.Color(field="cat", type="nominal",scale=alt.Scale(scheme='viridis'))
-        ).properties(height=300, width=1300,title='Man hours distribution by reg number and cat. performer')
+        ).properties(height=500,title='Man hours distribution by reg number and cat. performer')
             
         text_ch_2 = chart_2.mark_text(
             align="center",
@@ -149,18 +151,19 @@ with st.container(border=True):
         # full_chart
         full_chart = ((full_ch_3 | full_ch_4).resolve_scale(color='independent') & full_ch_1 & full_ch_2).resolve_scale(color='independent')
 
-        col1, col2 = st.columns([1, 1.45],vertical_alignment='top')
+        col1, col2 = st.columns([1, 1.55],vertical_alignment='top')
 
         with col1:
-
-            st.write(full_ch_7)
+            st.altair_chart(full_ch_7, theme="streamlit", use_container_width=True)
 
         with col2:
             st.dataframe(ac_pack_dist)
 
-        st.write((full_ch_1 & full_ch_2).resolve_scale(color='independent'))
-        st.dataframe(hard_work)
-        st.dataframe(all_works,width=1400,height=1000)
+        # st.write((full_ch_1 & full_ch_2).resolve_scale(color='independent'))
+        st.altair_chart(full_ch_1, theme="streamlit", use_container_width=True)
+        st.altair_chart(full_ch_2, theme="streamlit", use_container_width=True)
+        st.dataframe(hard_work,use_container_width=True)
+        st.dataframe(all_works,use_container_width=True)
         
 #         col3, col4 = st.columns(2,vertical_alignment='top')
 #         with col3:

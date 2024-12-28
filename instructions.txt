@@ -1,0 +1,21 @@
+Инструкция по подготовке файла к загрузке в приложение UTG_MaintenanceApp:
+- сформируйте файл .xlsl в GoogleDoc или Excel.
+- перенесите информацию из письма в сформированный файл.
+- проследите наличие информации по следующим столбцам: название АК, тип ВС, рег. номер ВС, номер пакета, номер WO, описание работы, время начала пакета работ, время окончания пакета работ, категория исполнителя, трудоемкость работы.
+- проверьте последовательность столбцов СТРОГО, как указано в строке выше.
+- заполните столбец категория исполнителя (вручную - основываясь на опыте работы в авиации)
+- удалите строку с названиями столбцов
+- сохраните файл в формате .CSV.
+- загрузите файл в программу UTG_MaintenanceApp.
+
+----------------------------------------------
+
+Instructions for preparing a file for uploading to the UTG_MaintenanceApp application:
+- generate an .xlsl file in GoogleDoc or Excel.
+- transfer information from the letter to the generated file.
+- check for information in the following columns: airline name, aircraft type, aircraft reg. number, package number, WO number, job description, work package start time, work package end time, performer category, work intensity.
+- check the column sequence STRICTLY as specified in the line above.
+- fill in the performer category column (manually - based on experience in aviation)
+- delete the line with the column names
+- save the file in .CSV format.
+- upload the file to the UTG_MaintenanceApp program.
